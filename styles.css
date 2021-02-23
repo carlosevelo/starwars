@@ -1,4 +1,40 @@
 body {
     display: grid;
     grid-template-rows: auto;
+    gap: 5px;
+}
+
+#header {
+    background: rgb(95, 95, 95);
+    text-align: center;
+}
+
+#form {
+    background: rgb(175, 175, 175);
+    text-align: center;
+
+}
+#label {
+
+}
+#searchType {
+
+}
+#searchInput {
+
+}
+#searchSubmit {
+
+}
+
+#searchResults {
+    background: rgb(95, 95, 95);
+    text-align: center;
+
+} 
+
+#footer {
+    background: rgb(175, 175, 175);
+    text-align: center;
+
 }
