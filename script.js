@@ -10,6 +10,7 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
         window.alert("Must select a search type")
     }
     else {
+        document.getElementById("filler").style.display = "none";
         if (input === "") {
             fetch(url + type + "?search=")
             .then(function(response) {
@@ -27,26 +28,51 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
             })
             .then(function(json) {
                 console.log(json);
+                document.getElementById("searchResults");
+
                 //Format the results json
                 if (type === "films") {
-                    //Title & episode id
+                    let filmDiv = document.getElementById("films");
+                    let resultsArray = json.results;
+                    
+                    resultsArray.forEach(element => {
+                        //Title & episode id
+                        let title_episode = "<h2>Episode " + element.episode_id + ": " + element.title + "</h2>";
+                        filmDiv.innerHTML = title_episode;
+                        //Producer & Director
+                        let prod_direct = "<h4>Producer: " + element.producer + "<br/>Director: " + element.director + "</h4>";
+                        filmDiv.innerHTML += prod_direct;
+                        //Release date
+                        let release = "<h4>Release Date: " + element.release_date + "</h4>";
+                        filmDiv.innerHTML += release;
+                        //Opening crawl
+                        let crawl = "<p>" + element.opening_crawl + "</p>"
+                        filmDiv.innerHTML += crawl;
+                        //Characters (fetch urls)
+                        let charArray = element.characters;
+                        let charList = "<p>Characters: ";
+                        for (charURL of charArray) {
+                            fetch(charURL)
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                console.log(json);
+                                charList += json.name + " ";
+                            })
+                        }
+                        
+                        filmDiv.innerHTML += (charList + "</p>");
+                        //Planets (fetch urls)
 
-                    //Producer & Director
+                        //Species (fetch urls)
 
-                    //Release date
+                        //Starships (fetch urls) 
 
-                    //Opening crawl
+                        //Vehicles (fetch urls)
 
-                    //Characters (fetch urls)
-
-                    //Planets (fetch urls)
-
-                    //Species (fetch urls)
-
-                    //Starships (fetch urls) 
-
-                    //Vehicles (fetch urls)
-
+                    });  
+                    filmDiv.style.display = "grid";
                 }
                 else if (type === "people") {
                     //Name
@@ -189,5 +215,4 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
             })
         }
     }
-   
 })
