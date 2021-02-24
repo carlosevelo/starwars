@@ -16,6 +16,7 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
                 return response.json();
             })
             .then(function(json) {
+                console.log(json);
                 //Parse all data 
             })
         }
@@ -183,7 +184,7 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
                     //films (fetch urls)
 
                     //pilots (fetch urls)
-                    
+
                 }
             })
         }
