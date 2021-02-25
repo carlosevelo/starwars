@@ -38,32 +38,32 @@ body {
 }
 #films {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 #people {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 #planets {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 #species {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 #starships {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 #vehicles {
     background: rgb(95, 95, 95);
-    display: grid;
+    display: none;
 
 }
 

@@ -32,16 +32,15 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
 
                 //Format the results json
                 if (type === "films") {
-                    let filmDiv = document.getElementById("films");
                     let title_episode = document.getElementById("film_title");
                     let prod_direct = document.getElementById("prod_direct");
                     let release = document.getElementById("release");
                     let crawl = document.getElementById("crawl");
-                    let charList = document.getElementById("charList");
-                    let planetList = document.getElementById("planetList");
-                    let speciesList = document.getElementById("speciesList");
-                    let starshipsList = document.getElementById("starshipsList");
-                    let vehiclesList = document.getElementById("vehiclesList");
+                    let charList = document.getElementById("film_charList");
+                    let planetList = document.getElementById("film_planetList");
+                    let speciesList = document.getElementById("film_speciesList");
+                    let starshipsList = document.getElementById("film_starshipsList");
+                    let vehiclesList = document.getElementById("film_vehiclesList");
 
                     let resultsArray = json.results;
                     
@@ -110,57 +109,151 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
                             })
                         }
                     });  
+                    document.getElementById("films").style.display = "grid";
+
                 }
                 else if (type === "people") {
-                    //Name
+                    let people_name = document.getElementById("people_name");
+                    let birthYear = document.getElementById("birthYear");
+                    let eyeColor = document.getElementById("eyeColor");
+                    let gender = document.getElementById("gender");
+                    let hairColor = document.getElementById("hairColor");
+                    let height = document.getElementById("height");
+                    let mass = document.getElementById("mass");
+                    let skinColor = document.getElementById("skinColor");
+                    let homeWorld = document.getElementById("homeWorld");
+                    let filmList = document.getElementById("people_filmList");
+                    let speciesList = document.getElementById("people_speciesList");
+                    let starshipsList = document.getElementById("people_starshipsList");
+                    let vehiclesList = document.getElementById("people_vehiclesList");
 
-                    //Birth year
+                    let resultsArray = json.results;
 
-                    //Eye color
-
-                    //Gender
-
-                    //Hair color
-
-                    //Height 
-
-                    //Mass
-
-                    //Skin color
-
-                    //Home world (fetch url)
-
-                    //Films (fetch urls)
-
-                    //Species (fetch urls)
-
-                    //Starships (fetch urls)
-
-                    //Vehicles (fetch urls)
+                    resultsArray.forEach(element => {
+                        //Name
+                        people_name.innerHTML = "<h2>" + element.name + "</h2>";
+                        //Birth year
+                        birthYear.innerHTML = "<h4>Birth Year: <br/>" + element.birth_year + "</h4>";
+                        //Eye color
+                        eyeColor.innerHTML = "<h4>Eye Color: " + element.eye_color + "</h4>";
+                        //Gender
+                        gender.innerHTML = "<h4>Gender: " + element.gender + "</h4>"
+                        //Hair Color
+                        hairColor.innerHTML = "<h4>Hair Color: " + element.hair_color + "</h4>"
+                        //height
+                        height.innerHTML = "<h4>Height: " + element.height + "</h4>"
+                        //Mass
+                        mass.innerHTML = "<h4>Mass: " + element.mass + "</h4>"
+                        //Skin color
+                        skinColor.innerHTML = "<h4>Skin Color: " + element.skin_color + "</h4>"
+                        //home World
+                        homeWorld.innerHTML = "<h4>Home World: " + element.home_world + "</h4>"
+                        //Films
+                        let filmsArray = element.films;
+                        for (let i = 0; i < filmsArray.length; i++) {
+                            fetch(filmsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                filmList.innerHTML += json.title + " ";
+                            })
+                        }
+                        //Species (fetch urls)
+                        let speciesArray = element.species;
+                        for (let i = 0; i < speciesArray.length; i++) {
+                            fetch(speciesArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                speciesList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Starships (fetch urls) 
+                        let starshipsArray = element.starships;
+                        for (let i = 0; i < starshipsArray.length; i++) {
+                            fetch(starshipsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                starshipsList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Vehicles (fetch urls)
+                        let vehiclesArray = element.vehicles;
+                        for (let i = 0; i < vehiclesArray.length; i++) {
+                            fetch(vehiclesArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                vehiclesList.innerHTML += json.name + " ";
+                            })
+                        }
+                    });
+                    document.getElementById("people").style.display = "grid";
 
                 }
                 else if (type === "planets") {
-                    //Name
+                    let planet_name = document.getElementById("planet_name");
+                    let diameter = document.getElementById("diameter");
+                    let rotation = document.getElementById("rotation");
+                    let orbital = document.getElementById("orbital");
+                    let gravity = document.getElementById("gravity");
+                    let population = document.getElementById("population");
+                    let climate = document.getElementById("climate");
+                    let terrain = document.getElementById("terrain");
+                    let water = document.getElementById("water");
+                    let charList = document.getElementById("planets_charList");
+                    let filmList = document.getElementById("planets_filmList");
+                    
+                    let resultsArray = json.results;
 
-                    //Diameter
-
-                    //Rotation Period
-
-                    //Orbital period
-
-                    //Gravity
-
-                    //Population
-
-                    //Climate
-
-                    //Terrain
-
-                    //Surface water
-
-                    //Residents (fetch urls)
-
-                    //Films (fetch urls)
+                    resultsArray.forEach(element => {
+                        //Name
+                        planet_name.innerHTML = "<h2>" + element.name + "</h2>";
+                        //Birth year
+                        diameter.innerHTML = "<h4>Diameter: <br/>" + element.diameter + "</h4>";
+                        //Eye color
+                        rotation.innerHTML = "<h4>Rotation: " + element.rotation_period + "</h4>";
+                        //Gender
+                        orbital.innerHTML = "<h4>Orbit: " + element.orbital_period + "</h4>"
+                        //Hair Color
+                        gravity.innerHTML = "<h4>Gravity: " + element.gravity + "</h4>"
+                        //height
+                        population.innerHTML = "<h4>Population: " + element.population + "</h4>"
+                        //Mass
+                        climate.innerHTML = "<h4>Climate: " + element.climate + "</h4>"
+                        //Skin color
+                        terrain.innerHTML = "<h4>Terrain: " + element.terrain + "</h4>"
+                        //home World
+                        water.innerHTML = "<h4>Surface Water: " + element.surface_water + "</h4>"
+                        //Residents 
+                        let charArray = element.residents;
+                        for (let i = 0; i < charArray.length; i++) {
+                            fetch(charArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                charList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Films
+                        let filmsArray = element.films;
+                        for (let i = 0; i < filmsArray.length; i++) {
+                            fetch(filmsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                filmList.innerHTML += json.title + " ";
+                            })
+                        }
+                    });
+                    document.getElementById("planets").style.display = "grid";
 
                 }
                 else if (type === "species") {
