@@ -398,7 +398,70 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
 
                 }
                 else if (type === "vehicles") {
+                    let vehicle_name = document.getElementById("vehicle_name");
+                    let vehicle_model = document.getElementById("vehicle_model");
+                    let vehicle_class = document.getElementById("vehicle_class");
+                    let vehicle_manufacturer = document.getElementById("vehicle_manufacturer");
+                    let vehicle_cost = document.getElementById("vehicle_cost");
+                    let vehicle_length = document.getElementById("vehicle_length");
+                    let vehicle_crew = document.getElementById("vehicle_crew");
+                    let vehicle_passengers = document.getElementById("vehicle_passengers");
+                    let vehicle_speed = document.getElementById("vehicle_speed");
+                    let vehicle_capacity = document.getElementById("vehicle_capacity");
+                    let vehicle_consumables = document.getElementById("vehicle_consumables");
+                    let charList = document.getElementById("vehicle_charList");
+                    let filmList = document.getElementById("vehicle_filmList");
                     
+                    let resultsArray = json.results;
+
+                    resultsArray.forEach(element => {
+                        //Name
+                        vehicle_name.innerHTML = "<h2>" + element.name + "</h2>";
+                        //model
+                        vehicle_model.innerHTML = "<h4>Model: <br/>" + element.model + "</h4>";
+                        //class
+                        vehicle_class.innerHTML = "<h4>Class: " + element.vehicle_class + "</h4>";
+                        //manufacturer
+                        vehicle_manufacturer.innerHTML = "<h4>Manufacturer: " + element.manufacturer + "</h4>"
+                        //cost
+                        vehicle_cost.innerHTML = "<h4>Cost in Credits: " + element.cost_in_credits + "</h4>"
+                        //length
+                        vehicle_length.innerHTML = "<h4>Length: " + element.length + "</h4>"
+                        //crew
+                        vehicle_crew.innerHTML = "<h4>Crew: " + element.crew + "</h4>"
+                        //passengers
+                        vehicle_passengers.innerHTML = "<h4>Passengers: " + element.passengers + "</h4>"
+                        //speed
+                        vehicle_speed.innerHTML = "<h4>Max Atmospheric Speed: " + element.max_atmosphering_speed + "</h4>"
+                        //capacity
+                        vehicle_capacity.innerHTML = "<h4>Cargo Capacity: " + element.cargo_capacity + "</h4>"
+                        //consumables
+                        vehicle_consumables.innerHTML = "<h4>Consumables: " + element.consumables + "</h4>"
+                        //Characters 
+                        let charArray = element.pilots;
+                        for (let i = 0; i < charArray.length; i++) {
+                            fetch(charArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                charList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Films
+                        let filmsArray = element.films;
+                        for (let i = 0; i < filmsArray.length; i++) {
+                            fetch(filmsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                filmList.innerHTML += json.title + " ";
+                            })
+                        }
+                    });
+                    document.getElementById("vehicles").style.display = "grid";
+
                 }
             })
         }
