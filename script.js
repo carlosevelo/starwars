@@ -3,7 +3,7 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
     const input = document.getElementById("searchInput").value;
     const type = document.getElementById("searchType").value;
 
-    const url = "https://swapi.dev/api/";
+    const url = "http://swapi.dev/api/";
 
     if (type === "") {
         //Make a pretty pop up with hidden html
@@ -33,46 +33,83 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
                 //Format the results json
                 if (type === "films") {
                     let filmDiv = document.getElementById("films");
+                    let title_episode = document.getElementById("film_title");
+                    let prod_direct = document.getElementById("prod_direct");
+                    let release = document.getElementById("release");
+                    let crawl = document.getElementById("crawl");
+                    let charList = document.getElementById("charList");
+                    let planetList = document.getElementById("planetList");
+                    let speciesList = document.getElementById("speciesList");
+                    let starshipsList = document.getElementById("starshipsList");
+                    let vehiclesList = document.getElementById("vehiclesList");
+
                     let resultsArray = json.results;
                     
                     resultsArray.forEach(element => {
                         //Title & episode id
-                        let title_episode = "<h2>Episode " + element.episode_id + ": " + element.title + "</h2>";
-                        filmDiv.innerHTML = title_episode;
+                        title_episode.innerHTML = "<h2>Episode " + element.episode_id + ": " + element.title + "</h2>";
                         //Producer & Director
-                        let prod_direct = "<h4>Producer: " + element.producer + "<br/>Director: " + element.director + "</h4>";
-                        filmDiv.innerHTML += prod_direct;
+                        prod_direct.innerHTML = "<h4>Producer: " + element.producer + "<br/>Director: " + element.director + "</h4>";
                         //Release date
-                        let release = "<h4>Release Date: " + element.release_date + "</h4>";
-                        filmDiv.innerHTML += release;
+                        release.innerHTML = "<h4>Release Date: " + element.release_date + "</h4>";
                         //Opening crawl
-                        let crawl = "<p>" + element.opening_crawl + "</p>"
-                        filmDiv.innerHTML += crawl;
+                        crawl.innerHTML = "<p>" + element.opening_crawl + "</p>"
                         //Characters (fetch urls)
                         let charArray = element.characters;
-                        let charList = "<p>Characters: ";
-                        for (charURL of charArray) {
-                            fetch(charURL)
+                        for (let i = 0; i < charArray.length; i++) {
+                            fetch(charArray[i])
                             .then(function(response) {
                                 return response.json();
                             })
                             .then(function(json) {
-                                console.log(json);
-                                charList += json.name + " ";
+                                charList.innerHTML += json.name + " ";
                             })
                         }
-                        
-                        filmDiv.innerHTML += (charList + "</p>");
                         //Planets (fetch urls)
-
+                        let planetArray = element.planets;
+                        for (let i = 0; i < planetArray.length; i++) {
+                            fetch(planetArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                planetList.innerHTML += json.name + " ";
+                            })
+                        }
                         //Species (fetch urls)
-
+                        let speciesArray = element.species;
+                        for (let i = 0; i < speciesArray.length; i++) {
+                            fetch(speciesArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                speciesList.innerHTML += json.name + " ";
+                            })
+                        }
                         //Starships (fetch urls) 
-
+                        let starshipsArray = element.starships;
+                        for (let i = 0; i < starshipsArray.length; i++) {
+                            fetch(starshipsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                starshipsList.innerHTML += json.name + " ";
+                            })
+                        }
                         //Vehicles (fetch urls)
-
+                        let vehiclesArray = element.vehicles;
+                        for (let i = 0; i < vehiclesArray.length; i++) {
+                            fetch(vehiclesArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                vehiclesList.innerHTML += json.name + " ";
+                            })
+                        }
                     });  
-                    filmDiv.style.display = "grid";
                 }
                 else if (type === "people") {
                     //Name
@@ -215,4 +252,6 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
             })
         }
     }
+    document.getElementById("searchResults").style.display = "grid";
+
 })
