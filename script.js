@@ -257,29 +257,72 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
 
                 }
                 else if (type === "species") {
-                    //Name 
-
-                    //Classification
+                    let species_name = document.getElementById("species_name");
+                    let classification = document.getElementById("classification");
+                    let designation = document.getElementById("designation");
+                    let avgHeight = document.getElementById("avgHeight");
+                    let avgLifeSpan = document.getElementById("avgLifeSpan");
+                    let eyeColors = document.getElementById("eyeColors");
+                    let hairColors = document.getElementById("hairColors");
+                    let skinColors = document.getElementById("skinColors");
+                    let language = document.getElementById("language");
+                    let homeWorld = document.getElementById("species_homeWorld");
+                    let charList = document.getElementById("species_charList");
+                    let filmList = document.getElementById("species_filmList");
                     
-                    //Designation
+                    let resultsArray = json.results;
 
-                    //Average Height
-
-                    //Average life span
-
-                    //eye colors
-                    
-                    //hair colors
-
-                    //skin colors
-
-                    //language
-
-                    //homeworld (fetch urls)
-
-                    //people (fetch urls)
-
-                    //films (fetch urls)
+                    resultsArray.forEach(element => {
+                        //Name
+                        species_name.innerHTML = "<h2>" + element.name + "</h2>";
+                        //classification
+                        classification.innerHTML = "<h4>Classification: <br/>" + element.classification + "</h4>";
+                        //designation
+                        designation.innerHTML = "<h4>Designation: " + element.designation + "</h4>";
+                        //avgHeight
+                        avgHeight.innerHTML = "<h4>Average Height: " + element.average_height + "</h4>"
+                        //avgLifeSpan
+                        avgLifeSpan.innerHTML = "<h4>Average Lifespan: " + element.average_lifespan + "</h4>"
+                        //eyeColors
+                        eyeColors.innerHTML = "<h4>Eye Colors: " + element.eye_colors + "</h4>"
+                        //hairColors
+                        hairColors.innerHTML = "<h4>Hair Colors: " + element.hair_colors + "</h4>"
+                        //Skin color
+                        skinColors.innerHTML = "<h4>Skin Colors: " + element.skin_colors + "</h4>"
+                        //language
+                        language.innerHTML = "<h4>Language: " + element.language + "</h4>"
+                        //Home world 
+                        fetch(element.homeworld)
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                homeWorld.innerHTML = "<h4>Homeworld: " + json.name + "</h4>";
+                            })
+                        //Characters 
+                        let charArray = element.people;
+                        for (let i = 0; i < charArray.length; i++) {
+                            fetch(charArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                charList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Films
+                        let filmsArray = element.films;
+                        for (let i = 0; i < filmsArray.length; i++) {
+                            fetch(filmsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                filmList.innerHTML += json.title + " ";
+                            })
+                        }
+                    });
+                    document.getElementById("species").style.display = "grid";
 
                 }
                 else if (type === "starships") {
