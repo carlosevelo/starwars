@@ -326,64 +326,79 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
 
                 }
                 else if (type === "starships") {
-                    //Name 
+                    let starship_name = document.getElementById("starship_name");
+                    let starship_model = document.getElementById("starship_model");
+                    let starship_class = document.getElementById("starship_class");
+                    let starship_manufacturer = document.getElementById("starship_manufacturer");
+                    let starship_cost = document.getElementById("starship_cost");
+                    let starship_length = document.getElementById("starship_length");
+                    let starship_crew = document.getElementById("starship_crew");
+                    let starship_passengers = document.getElementById("starship_passengers");
+                    let starship_speed = document.getElementById("starship_speed");
+                    let starship_hyperdrive = document.getElementById("starship_hyperdrive");
+                    let starship_MGL = document.getElementById("starship_MGL");
+                    let starship_capacity = document.getElementById("starship_capacity");
+                    let starship_consumables = document.getElementById("starship_consumables");
+                    let charList = document.getElementById("starship_charList");
+                    let filmList = document.getElementById("starship_filmList");
+                    
+                    let resultsArray = json.results;
 
-                    //Model
-
-                    //Starship class
-
-                    //Manufacturer
-
-                    //Cost in credits
-
-                    //length
-
-                    //Crew
-
-                    //Passengers
-
-                    //Max atmospheric speed 
-
-                    //Hyperdrive rating
-
-                    //Max num of Megalights per hour (speed)
-
-                    //Cargo capacity
-
-                    //Consumables (time)
-
-                    //Films (fetch urls)
-
-                    //Pilots (fetch urls)
+                    resultsArray.forEach(element => {
+                        //Name
+                        starship_name.innerHTML = "<h2>" + element.name + "</h2>";
+                        //model
+                        starship_model.innerHTML = "<h4>Model: <br/>" + element.model + "</h4>";
+                        //class
+                        starship_class.innerHTML = "<h4>Class: " + element.starship_class + "</h4>";
+                        //manufacturer
+                        starship_manufacturer.innerHTML = "<h4>Manufacturer: " + element.manufacturer + "</h4>"
+                        //cost
+                        starship_cost.innerHTML = "<h4>Cost in Credits: " + element.cost_in_credits + "</h4>"
+                        //length
+                        starship_length.innerHTML = "<h4>Length: " + element.length + "</h4>"
+                        //crew
+                        starship_crew.innerHTML = "<h4>Crew: " + element.crew + "</h4>"
+                        //passengers
+                        starship_passengers.innerHTML = "<h4>Passengers: " + element.passengers + "</h4>"
+                        //speed
+                        starship_speed.innerHTML = "<h4>Max Atmospheric Speed: " + element.max_atmosphering_speed + "</h4>"
+                        //hyperdrive
+                        starship_hyperdrive.innerHTML = "<h4>Hyperdrive Rating: " + element.hyperdrive_rating + "</h4>"
+                        //MGL
+                        starship_MGL.innerHTML = "<h4>MGLT: " + element.MGLT + "</h4>"
+                        //capacity
+                        starship_capacity.innerHTML = "<h4>Cargo Capacity: " + element.cargo_capacity + "</h4>"
+                        //consumables
+                        starship_consumables.innerHTML = "<h4>Consumables: " + element.consumables + "</h4>"
+                        //Characters 
+                        let charArray = element.pilots;
+                        for (let i = 0; i < charArray.length; i++) {
+                            fetch(charArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                charList.innerHTML += json.name + " ";
+                            })
+                        }
+                        //Films
+                        let filmsArray = element.films;
+                        for (let i = 0; i < filmsArray.length; i++) {
+                            fetch(filmsArray[i])
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(json) {
+                                filmList.innerHTML += json.title + " ";
+                            })
+                        }
+                    });
+                    document.getElementById("starships").style.display = "grid";
 
                 }
                 else if (type === "vehicles") {
-                    //Name
-
-                    //Model
-
-                    //Vehicle class
-
-                    //Manufacturer
-
-                    //Length
-
-                    //Cost in credits
-
-                    //crew
-
-                    //passengers
-
-                    //max atmoshperic speed
-
-                    //cargo capacity
-
-                    //consumables
-
-                    //films (fetch urls)
-
-                    //pilots (fetch urls)
-
+                    
                 }
             })
         }
