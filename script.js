@@ -11,6 +11,10 @@ document.getElementById("search-btn").addEventListener("click", function(event) 
     }
     else {
         document.getElementById("filler").style.display = "none";
+        let allResults = document.querySelectorAll('#films, #people, #planets, #species, #starships, #vehicles');
+        allResults.forEach((result) => {
+            result.style.display = "none";
+        })
         if (input === "") {
             fetch(url + type + "?search=")
             .then(function(response) {
