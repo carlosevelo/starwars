@@ -1,4 +1,4 @@
-document.getElementById("searchSubmit").addEventListener("click", function(event) {
+document.getElementById("search-btn").addEventListener("click", function(event) {
     event.preventDefault();
     const input = document.getElementById("searchInput").value;
     const type = document.getElementById("searchType").value;
@@ -467,5 +467,4 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
         }
     }
     document.getElementById("searchResults").style.display = "grid";
-
 })

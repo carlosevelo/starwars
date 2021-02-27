@@ -9,14 +9,12 @@
 
 <body>
   <div id="header">
-    <h1 id="title">StarWars App</h1>
+    <h1 id="title">Star Wars Search</h1>
   </div>
 
     <div id="form">
-        <form> 
-        <label id="label">Choose Search Type:</label><br/>
         <select name="searchType" id="searchType">
-            <option value="">-Choose Type-</option>
+            <option value="">Choose Search Type</option>
             <option value="films">Films</option>
             <option value="people">People</option>
             <option value="planets">Planets</option>
@@ -24,13 +22,16 @@
             <option value="starships">Starships</option>
             <option value="vehicles">Vehicles</option>
         </select>
-        <input id="searchInput" type="text"></input><br/>
-        <input id="searchSubmit" type="submit"></input>
+        <form action="" class="search-bar"> 
+            <input id="searchInput" type="search" name="search" pattern=".*\S.*" required></input>
+            <button id="search-btn" type="submit">
+                <span>Search</span>
+            </button>
         </form>
     </div>
 
     <div id="filler">
-        <h2>Pre search results filler</h2>
+        <h2>A long time ago in a galaxy far, far away...</h2>
     </div>
     <div id="searchResults">
         <div id="films">
