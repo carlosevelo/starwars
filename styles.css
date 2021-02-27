@@ -165,9 +165,6 @@ input {
     padding: 5px;
     border-radius: 15px;
 }
-#label {
-
-}
 #searchType {
     width: 25%;
     height: 25px;
@@ -176,13 +173,6 @@ input {
 #searchType * {
     text-align: center;
 }
-#searchInput {
-
-}
-#searchSubmit {
-
-}
-
 #searchResults {
     background: rgb(95, 95, 95, .9);
     text-align: center;
